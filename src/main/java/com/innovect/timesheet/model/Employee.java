@@ -1,5 +1,7 @@
 package com.innovect.timesheet.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,9 +17,11 @@ public class Employee {
   private String mobileNumber;
 
   @ManyToMany(mappedBy="employees",cascade = CascadeType.ALL)
+  @JsonManagedReference
   private List<Project> projects;
 
   @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+  @JsonManagedReference
   private List<Timesheet> timesheets;
 
   public Employee() {

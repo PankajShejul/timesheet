@@ -1,5 +1,7 @@
 package com.innovect.timesheet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,9 +17,11 @@ public class Timesheet {
   private Integer hours;
   @ManyToOne
   @JoinColumn(name="project_id")
+  @JsonBackReference
   private Project project;
   @ManyToOne
   @JoinColumn(name = "employee_id")
+  @JsonBackReference
   private Employee employee;
 
   public Timesheet() {
@@ -53,19 +57,16 @@ public class Timesheet {
     this.hours = hours;
   }
 
-/*
   public Project getProject() {
     return project;
   }
-*/
 
   public void setProject(Project project) {
     this.project = project;
   }
-/*
   public Employee getEmployee() {
     return employee;
-  }*/
+  }
 
   public void setEmployee(Employee employee) {
     this.employee = employee;

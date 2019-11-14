@@ -13,8 +13,8 @@ public class ProjectController {
   private ProjectService projectService;
 
   @GetMapping("/GetCost/{id}")
-  public void getProjectCost(@PathVariable("id") Integer id){
-     projectService.getProjectCost(id);
+  public Double getProjectCost(@PathVariable("id") Integer id){
+     return projectService.getProjectCost(id);
 
   }
 }

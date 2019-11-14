@@ -6,8 +6,8 @@ import com.innovect.timesheet.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -15,22 +15,25 @@ public class ProjectService {
   @Autowired
   private ProjectRepository projectRepository;
 
-  public void getProjectCost(Integer id){
+  public Double getProjectCost(Integer id){
     Optional<Project> temp=projectRepository.findById(1);
     System.out.println(temp.get());
-    Integer hours=0;
+    Integer hours=temp.get().getTimesheets().stream().collect(Collectors.summingInt(Timesheet::getHours));
     Double getWage=temp.get().getCostCenter().getPerHourWage();
-    if(temp.isPresent())
-    {
-      List<Timesheet> listOfTimesheets=temp.get().getTimesheets();
-      for(Timesheet t:listOfTimesheets)
-      {
-        hours+=t.getHours();
-      }
-      System.out.println(hours*getWage);
-    }else{
-      System.out.println("Null -----------------------------------------------------------------------Null");
-    }
+    return hours*getWage;
+//    if(temp.isPresent())
+//    {
+//      List<Timesheet> listOfTimesheets=temp.get().getTimesheets();
+//      for(Timesheet t:listOfTimesheets)
+//      {
+//        hours+=t.getHours();
+//      }
+//      System.out.println(hours*getWage);
+//    }else{
+//      System.out.println("Null -----------------------------------------------------------------------Null");
+//    }
+
+
 
   }
 

@@ -1,5 +1,7 @@
 package com.innovect.timesheet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +21,11 @@ public class Project {
   @JoinTable(name = "project_employee",
       joinColumns = @JoinColumn(name = "project_id"),
       inverseJoinColumns = @JoinColumn(name="employee_id"))
+  @JsonBackReference
   private List<Employee> employees;
 
   @OneToMany(mappedBy = "project",cascade = CascadeType.ALL)
+  @JsonBackReference
   private List<Timesheet> timesheets;
 
   public Project() {
@@ -70,9 +74,10 @@ public class Project {
     this.costCenter = costCenter;
   }
 
-//  public List<Employee> getEmployees() {
-//    return employees;
-//  }
+
+  public List<Employee> getEmployees() {
+    return employees;
+  }
 
   @Override
   public String toString() {
