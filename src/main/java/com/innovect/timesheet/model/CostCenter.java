@@ -9,8 +9,25 @@ public class CostCenter {
   private Integer costCenterId;
   private String name;
   private Double cost;
+  private Double perHourWage=100.0;
+  private Double dailyWage=1000.0;
   private Type type;
 
+  public Double getPerHourWage() {
+    return perHourWage;
+  }
+
+  public void setPerHourWage(Double perHourWage) {
+    this.perHourWage = perHourWage;
+  }
+
+  public Double getDailyWage() {
+    return dailyWage;
+  }
+
+  public void setDailyWage(Double dailyWage) {
+    this.dailyWage = dailyWage;
+  }
 
   public CostCenter() {
   }

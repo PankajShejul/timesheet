@@ -74,6 +74,15 @@ public class Project {
 //    return employees;
 //  }
 
+  @Override
+  public String toString() {
+    return "Project{" +
+        "projectId=" + projectId +
+        ", title='" + title + '\'' +
+        ", costCenter=" + costCenter +
+        '}';
+  }
+
   public void setEmployees(List<Employee> employees) {
     this.employees = employees;
   }

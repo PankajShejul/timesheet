@@ -69,7 +69,7 @@ public class EmployeeService {
     timesheet4.setEmployee(employee2);
     timesheet5.setEmployee(employee2);
     p1.addEmployee(employee1);
-    p2.addEmployee(employee1);
+    p2.addEmployee(employee2);
 //    p3.addEmployee(employee2);
 //    p4.addEmployee(employee2);
 //    p5.addEmployee(employee2);
