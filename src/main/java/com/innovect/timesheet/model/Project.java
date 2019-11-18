@@ -1,12 +1,14 @@
 package com.innovect.timesheet.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+property="projectId")
 public class Project {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +23,9 @@ public class Project {
   @JoinTable(name = "project_employee",
       joinColumns = @JoinColumn(name = "project_id"),
       inverseJoinColumns = @JoinColumn(name="employee_id"))
-  @JsonBackReference
   private List<Employee> employees;
 
   @OneToMany(mappedBy = "project",cascade = CascadeType.ALL)
-  @JsonBackReference
   private List<Timesheet> timesheets;
 
   public Project() {

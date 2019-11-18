@@ -21,10 +21,6 @@ public class ProjectService {
     Integer hours=temp.get().getTimesheets().stream().collect(Collectors.summingInt(Timesheet::getHours));
     Double getWage=temp.get().getCostCenter().getPerHourWage();
     return hours*getWage;
-
-
-
-
   }
 
 }

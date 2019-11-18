@@ -1,12 +1,16 @@
 package com.innovect.timesheet.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+property = "timesheetId")
 public class Timesheet {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +21,9 @@ public class Timesheet {
   private Integer hours;
   @ManyToOne
   @JoinColumn(name="project_id")
-  @JsonBackReference
   private Project project;
   @ManyToOne
   @JoinColumn(name = "employee_id")
-  @JsonBackReference
   private Employee employee;
 
   public Timesheet() {

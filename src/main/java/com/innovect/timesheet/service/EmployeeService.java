@@ -17,34 +17,33 @@ public class EmployeeService {
   @Autowired
   private EmployeeRepository employeeRepository;
 
-  public Iterable<Employee> getAll()
-  {
-    return  employeeRepository.findAll();
+  public Iterable<Employee> getAll() {
+    return employeeRepository.findAll();
   }
 
   public void init() {
-    List<Project> project1=new ArrayList<>();
-    List<Project> project2=new ArrayList<>();
+    List<Project> project1 = new ArrayList<>();
+    List<Project> project2 = new ArrayList<>();
 
-    List<Timesheet> timesheets1=new ArrayList<>();
-    List <Timesheet> timesheets2=new ArrayList<>();
+    List<Timesheet> timesheets1 = new ArrayList<>();
+    List<Timesheet> timesheets2 = new ArrayList<>();
 
-    Timesheet timesheet1=new Timesheet(new Date(),8);
-    Timesheet timesheet2=new Timesheet(new Date(),8);
-    Timesheet timesheet3=new Timesheet(new Date(),8);
-    Timesheet timesheet4=new Timesheet(new Date(),8);
-    Timesheet timesheet5=new Timesheet(new Date(),8);
+    Timesheet timesheet1 = new Timesheet(new Date(), 8);
+    Timesheet timesheet2 = new Timesheet(new Date(), 8);
+    Timesheet timesheet3 = new Timesheet(new Date(), 8);
+    Timesheet timesheet4 = new Timesheet(new Date(), 8);
+    Timesheet timesheet5 = new Timesheet(new Date(), 8);
     timesheets1.add(timesheet1);
     timesheets1.add(timesheet2);
     timesheets2.add(timesheet3);
     timesheets2.add(timesheet4);
     timesheets2.add(timesheet5);
-    Project p1=new Project("abc",new CostCenter("abc",5000.0,1));
+    Project p1 = new Project("abc", new CostCenter("abc", 5000.0, 1));
     timesheet1.setProject(p1);
     timesheet2.setProject(p1);
 
     p1.setTimesheets(timesheets1);
-    Project p2=new Project("pqr",new CostCenter("pqr",5000.0,1));
+    Project p2 = new Project("pqr", new CostCenter("pqr", 5000.0, 1));
     timesheet3.setProject(p2);
     timesheet4.setProject(p2);
     timesheet5.setProject(p2);
@@ -61,8 +60,8 @@ public class EmployeeService {
 //    project2.add(p3);
 //    project2.add(p4);
 //    project2.add(p5);
-    Employee employee1= new Employee("qwer",1,"qwer@qw","88779944",project1);
-    Employee employee2= new Employee("hjkl",1,"hjkl@qw","12344112",project2);
+    Employee employee1 = new Employee("qwer", 1, "qwer@qw", "88779944", project1);
+    Employee employee2 = new Employee("hjkl", 1, "hjkl@qw", "12344112", project2);
     timesheet1.setEmployee(employee1);
     timesheet2.setEmployee(employee1);
     timesheet3.setEmployee(employee2);
@@ -75,5 +74,15 @@ public class EmployeeService {
 //    p5.addEmployee(employee2);
     employeeRepository.save(employee1);
     employeeRepository.save(employee2);
+  }
+
+  public void insertEmployee(List<Employee> listOfEmployee) {
+    for (Employee employee : listOfEmployee) {
+      employeeRepository.save(employee);
+    }
+  }
+
+  public Employee findById(Integer id){
+    return employeeRepository.findById(id).get();
   }
 }

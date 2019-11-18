@@ -1,12 +1,17 @@
 package com.innovect.timesheet.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+property="id")
 public class Employee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +22,9 @@ public class Employee {
   private String mobileNumber;
 
   @ManyToMany(mappedBy="employees",cascade = CascadeType.ALL)
-  @JsonManagedReference
   private List<Project> projects;
 
   @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
-  @JsonManagedReference
   private List<Timesheet> timesheets;
 
   public Employee() {
@@ -33,6 +36,14 @@ public class Employee {
     this.email = email;
     this.mobileNumber = mobileNumber;
     this.projects = projects;
+  }
+
+  public List<Timesheet> getTimesheets() {
+    return timesheets;
+  }
+
+  public void setTimesheets(List<Timesheet> timesheets) {
+    this.timesheets = timesheets;
   }
 
   public Integer getId() {
